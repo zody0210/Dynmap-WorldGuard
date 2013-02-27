@@ -37,6 +37,8 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
     private static final Logger log = Logger.getLogger("Minecraft");
     private static final String LOG_PREFIX = "[Dynmap-WorldGuard] ";
     private static final String DEF_INFOWINDOW = "<div class=\"infowindow\"><span style=\"font-size:120%;\">%regionname%</span><br /> Owner <span style=\"font-weight:bold;\">%playerowners%</span><br />Flags<br /><span style=\"font-weight:bold;\">%flags%</span></div>";
+    private static DynmapWorldGuardPlugin dynmapw = null;
+    
     Plugin dynmap;
     DynmapAPI api;
     MarkerAPI markerapi;
@@ -305,6 +307,8 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
     
     public void onEnable() {
         info("initializing");
+        dynmapw = this;
+        getCommand("dynmapw").setExecutor(new CommandHandler());
         PluginManager pm = getServer().getPluginManager();
         /* Get dynmap */
         dynmap = pm.getPlugin("dynmap");
@@ -332,6 +336,10 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
         } catch (IOException iox) {
             
         }
+    }
+    
+    public static DynmapWorldGuardPlugin getInstance() {
+    	return dynmapw;
     }
 
     private boolean reload = false;

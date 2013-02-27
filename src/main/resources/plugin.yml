@@ -1,6 +1,9 @@
 name: Dynmap-WorldGuard
 main: org.dynmap.worldguard.DynmapWorldGuardPlugin
 version: "${project.version}"
+commands:
+    dynmapw:
+        description: The base Bow Warfare command
 author: mikeprimm
 depend: [ dynmap, WorldGuard ]
 
