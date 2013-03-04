@@ -25,8 +25,9 @@ public class CommandHandler implements CommandExecutor {
 			if (command.getName().equalsIgnoreCase("dynmapw")) {
 				if (args.length == 0) 
 					player.sendMessage("Arguments missing.");
-				else if (commands.valueOf(args[0]) != commands.enable || commands.valueOf(args[0]) != commands.disable || commands.valueOf(args[0]) != commands.showAll )
-					player.sendMessage("Unknown command");
+				else if (!args[0].equals("enable") || !args[0].equals("disable") || !args[0].equals("showAll")) {
+					player.sendMessage("Got '" + args[0] + "' as argument. This is unkown");
+				}
 
 				else {
 					// Enable Command
@@ -50,9 +51,5 @@ public class CommandHandler implements CommandExecutor {
 			}
 		}
 		return false;
-	}
-	
-	public enum commands {
-		enable, disable, showAll;
 	}
 }
