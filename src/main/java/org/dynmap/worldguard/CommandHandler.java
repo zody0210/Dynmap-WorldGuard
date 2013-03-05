@@ -25,29 +25,26 @@ public class CommandHandler implements CommandExecutor {
 			if (command.getName().equalsIgnoreCase("dynmapw")) {
 				if (args.length == 0) 
 					player.sendMessage("Arguments missing.");
-				else if (!args[0].equals("enable") || !args[0].equals("disable") || !args[0].equals("showAll")) {
-					player.sendMessage("Got '" + args[0] + "' as argument. This is unkown");
-				}
-
-				else {
+				else if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("showAll")) {
 					// Enable Command
 					if (args[0].equalsIgnoreCase("enable") && permcheck.hasEnablePerm(player)) 
 						new Enable(player, args);
 					else
 						player.sendMessage("No Permission to enable");
-					
+
 					// Disable Command
 					if (args[0].equalsIgnoreCase("disable") && permcheck.hasDisablePerm(player)) 
 						new Disable(player, args);
 					else
 						player.sendMessage("No Permission to disable");
-					
+
 					// ShowAll Command
 					if (args[0].equalsIgnoreCase("showAll") && permcheck.hasShowAll(player)) 
 						new ShowAll(player,args);
 					else
 						player.sendMessage("No Permission to showAll");
-				}
+				} else
+					player.sendMessage("Unknown Command: " + args[0]);
 			}
 		}
 		return false;
