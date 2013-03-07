@@ -57,7 +57,7 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 	Set<String> hidden;
 	Set<String> flagsToShow;
 	boolean stop; 
-	public boolean overide = false;
+	public boolean override = true;
 	public boolean showAll = false;
 	int maxdepth;
 
@@ -128,13 +128,14 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 	}
 
 	private boolean showRegion(ProtectedRegion region) {
-		if (showAll)
+		if (showAll) 
 			return true;
-		if (overide || !region.hasMembersOrOwners())
+		else if (override || !region.hasMembersOrOwners()) 
 			return false;
+
 		return true;
 	}
-	
+
 	private boolean isVisible(String id, String worldname) {
 		if((visible != null) && (visible.size() > 0)) {
 			if((visible.contains(id) == false) && (visible.contains("world:" + worldname) == false) &&

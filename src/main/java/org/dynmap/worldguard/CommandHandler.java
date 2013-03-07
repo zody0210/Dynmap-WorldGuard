@@ -7,11 +7,8 @@ import org.bukkit.entity.Player;
 import org.dynmap.worldguard.command.Disable;
 import org.dynmap.worldguard.command.Enable;
 import org.dynmap.worldguard.command.ShowAll;
-import org.dynmap.worldguard.permissions.PermissionChecker;
 
 public class CommandHandler implements CommandExecutor {
-
-	PermissionChecker permcheck = new PermissionChecker();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
@@ -27,22 +24,16 @@ public class CommandHandler implements CommandExecutor {
 					player.sendMessage("Arguments missing.");
 				else if (args[0].equalsIgnoreCase("enable") || args[0].equalsIgnoreCase("disable") || args[0].equalsIgnoreCase("showAll")) {
 					// Enable Command
-					if (args[0].equalsIgnoreCase("enable") && permcheck.hasEnablePerm(player)) 
+					if (args[0].equalsIgnoreCase("enable")) 
 						new Enable(player, args);
-					else
-						player.sendMessage("No Permission to enable");
 
 					// Disable Command
-					if (args[0].equalsIgnoreCase("disable") && permcheck.hasDisablePerm(player)) 
+					if (args[0].equalsIgnoreCase("disable")) 
 						new Disable(player, args);
-					else
-						player.sendMessage("No Permission to disable");
 
 					// ShowAll Command
-					if (args[0].equalsIgnoreCase("showAll") && permcheck.hasShowAll(player)) 
+					if (args[0].equalsIgnoreCase("showAll")) 
 						new ShowAll(player,args);
-					else
-						player.sendMessage("No Permission to showAll");
 				} else
 					player.sendMessage("Unknown Command: " + args[0]);
 			}
