@@ -277,7 +277,7 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 	}
 
 	/* Update worldguard region information */
-	private void updateRegions() {
+	public void updateRegions() {
 		Map<String,AreaMarker> newmap = new HashMap<String,AreaMarker>(); /* Build new map */
 
 		/* Loop through worlds */

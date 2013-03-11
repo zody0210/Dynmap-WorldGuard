@@ -22,5 +22,11 @@ public class PermissionChecker {
 		return false;
 	}
 
+	public boolean hasForce(Player player) {
+		if (player.hasPermission("dynmapw.force") || player.hasPermission("dynmapw.*") || player.isOp())
+			return true;
+		return false;
+	}
+
 
 }
