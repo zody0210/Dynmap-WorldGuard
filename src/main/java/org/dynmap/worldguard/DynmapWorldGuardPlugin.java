@@ -53,6 +53,7 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 	Map<String, AreaStyle> cusstyle;
 	Map<String, AreaStyle> cuswildstyle;
 	Map<String, AreaStyle> ownerstyle;
+	Map<String, AreaStyle> flagstyle;
 	Set<String> visible;
 	Set<String> hidden;
 	Set<String> flagsToShow;
@@ -182,6 +183,12 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 							as = ownerstyle.get(p.toLowerCase());
 					}
 				}
+			}
+		}
+		if(as == null) {    /* Check for flag style matches */
+			Map<Flag<?>, Object> map = region.getFlags();
+			for(Flag<?> f : map.keySet()) {
+				as = flagstyle.get(f.getName());
 			}
 		}
 		if(as == null)
@@ -402,6 +409,7 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 		defstyle = new AreaStyle(cfg, "regionstyle");
 		cusstyle = new HashMap<String, AreaStyle>();
 		ownerstyle = new HashMap<String, AreaStyle>();
+		flagstyle = new HashMap<String, AreaStyle>();
 		cuswildstyle = new HashMap<String, AreaStyle>();
 		ConfigurationSection sect = cfg.getConfigurationSection("custstyle");
 		if(sect != null) {
@@ -420,6 +428,14 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
 
 			for(String id : ids) {
 				ownerstyle.put(id.toLowerCase(), new AreaStyle(cfg, "ownerstyle." + id, defstyle));
+			}
+		}
+		sect = cfg.getConfigurationSection("flagstyle");
+		if(sect != null) {
+			Set<String> ids = sect.getKeys(false);
+
+			for(String id : ids) {
+				flagstyle.put(id.toLowerCase(), new AreaStyle(cfg, "flagstyle." + id, defstyle));
 			}
 		}
 		List<String> vis = cfg.getStringList("visibleregions");

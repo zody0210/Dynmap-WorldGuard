@@ -45,7 +45,12 @@ custstyle:
 ownerstyle:
   kingoftheworld:
     strokecolor: "#C0C0C0"
-    
+
+# Optional flag-based overrides for regionstyle (lower priority than ownerstyle) 
+flagstyle:
+  game-mode:
+    strokeColor: '#007F7F'
+
     
 # Limit depth of child regions (1=just top regions, 2=top plus children of top)
 maxdepth: 16
